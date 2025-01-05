@@ -1,0 +1,1559 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Daily_Report_Generator" this:Daily_Report_Generator.in_DBConnectionString="Data Source=EGLAESSAM;Integrated Security=True;Encrypt=False" this:Daily_Report_Generator.in_EmailRecivers="ahmed.essam@bmbgroup.com" this:Daily_Report_Generator.in_CCEmailRecivers="ahmed.essam@bmbgroup.com" this:Daily_Report_Generator.in_ReportDate="2025-01-05" this:Daily_Report_Generator.in_ReportsFolderPath="D:\Work\Bank-NXT\Projects\UiPath Processes Data\IPN Reconciliation Report\Reports" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:umae="clr-namespace:UiPath.Mail.Activities.Enums;assembly=UiPath.Mail.Activities" xmlns:usau="clr-namespace:UiPath.Shared.Activities.Utils;assembly=UiPath.Mail.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_DBConnectionString" Type="InArgument(x:String)" />
+    <x:Property Name="in_EmailRecivers" Type="InArgument(x:String)" />
+    <x:Property Name="in_CCEmailRecivers" Type="InArgument(x:String)" />
+    <x:Property Name="in_ReportDate" Type="InArgument(x:String)" />
+    <x:Property Name="in_ReportsFolderPath" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>Daily_Report_Generator_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Database</x:String>
+      <x:String>UiPath.Database.Activities</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities.Business</x:String>
+      <x:String>UiPath.Excel.Model</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>UiPath.Mail</x:String>
+      <x:String>UiPath.Shared.Activities.Utils</x:String>
+      <x:String>UiPath.Mail.Activities.Enums</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>System.Globalization</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.PDF.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>Omega.SftpClient.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Daily_Report_Generator" sap:VirtualizedContainerService.HintSize="1036,2703" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_ReconciledData" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_IPNStaged" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_CoreStaged" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_MismatchData" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_NotReconciledData" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_IPNRowData" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_CoreBankingRowData" />
+      <Variable x:TypeArguments="x:String" Name="str_HtmlMail" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_TempValue" />
+      <Variable x:TypeArguments="x:String" Name="str_TotalMatchedTrx" />
+      <Variable x:TypeArguments="x:String" Name="str_TotalMatchedDuplicatedTrx" />
+      <Variable x:TypeArguments="x:String" Name="str_TotalMismatchedTrx" />
+      <Variable x:TypeArguments="x:String" Name="str_TotalNotReconciledTrx" />
+      <Variable x:TypeArguments="x:String" Name="str_TotalTrxAmount" />
+      <Variable x:TypeArguments="x:String" Name="str_" />
+      <Variable x:TypeArguments="x:String" Name="str_NoDebitTrx" />
+      <Variable x:TypeArguments="x:String" Name="str_NoCreditTrx" />
+      <Variable x:TypeArguments="x:String" Name="str_A" />
+      <Variable x:TypeArguments="x:String" Name="str_AmountCreditTrx" />
+      <Variable x:TypeArguments="x:String" Name="str_AmountDebitTrx" />
+      <Variable x:TypeArguments="x:String" Name="str_ReportFilePath" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence DisplayName="Get Data(Tables) From DB" sap:VirtualizedContainerService.HintSize="513,57" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;Get Tables From DB&quot;]" />
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_ReconciledData]" DisplayName="Get All Day Reconciled Table" sap:VirtualizedContainerService.HintSize="416,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_1" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;SELECT * &quot; &amp; &#xA;        &quot;FROM [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] &quot; &amp; &#xA;        &quot;WHERE CONVERT(DATE, ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;'&quot;]">
+        <ui:ExecuteQuery.Parameters>
+          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+        </ui:ExecuteQuery.Parameters>
+      </ui:ExecuteQuery>
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_MismatchData]" DisplayName="Get All Mismatch-duplicated Table" sap:VirtualizedContainerService.HintSize="416,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_4" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;SELECT * &quot; &amp; &#xA;        &quot;FROM [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] &quot; &amp; &#xA;        &quot;WHERE CONVERT(DATE, ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;' &quot; &amp; &#xA;        &quot;AND ReconciliationStatus = 'reconciled' &quot; &amp; &#xA;        &quot;AND ReconciliationResult IN ('not matched', 'matched duplicated')&quot;]">
+        <ui:ExecuteQuery.Parameters>
+          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+        </ui:ExecuteQuery.Parameters>
+      </ui:ExecuteQuery>
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_NotReconciledData]" DisplayName="Get All Not-Reconciled Table" sap:VirtualizedContainerService.HintSize="416,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_5" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;SELECT * &quot; &amp; &#xA;        &quot;FROM [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] &quot; &amp; &#xA;        &quot;WHERE CONVERT(DATE, ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;' &quot; &amp; &#xA;        &quot;AND ReconciliationStatus = 'not reconciled' &quot;]">
+        <ui:ExecuteQuery.Parameters>
+          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+        </ui:ExecuteQuery.Parameters>
+      </ui:ExecuteQuery>
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_IPNStaged]" DisplayName="Get IPN Staged Table" sap:VirtualizedContainerService.HintSize="416,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_2" ProviderName="Microsoft.Data.SqlClient" Sql="Select * &#xA;FROM [UiPath Processes Data].[dbo].[IPNReconciliation_StagingIPNTransactions]">
+        <ui:ExecuteQuery.Parameters>
+          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+        </ui:ExecuteQuery.Parameters>
+      </ui:ExecuteQuery>
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_CoreStaged]" DisplayName="Get Core Staged Table" sap:VirtualizedContainerService.HintSize="416,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_3" ProviderName="Microsoft.Data.SqlClient" Sql="&#xA;Select * &#xA;FROM [UiPath Processes Data].[dbo].[IPNReconciliation_StagingCoreBankingTransactions]">
+        <ui:ExecuteQuery.Parameters>
+          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+        </ui:ExecuteQuery.Parameters>
+      </ui:ExecuteQuery>
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_CoreBankingRowData]" DisplayName="Get Core Row Data Table" sap:VirtualizedContainerService.HintSize="416,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_6" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;SELECT acbt.* &quot; &amp; &#xA;        &quot;FROM [UiPath Processes Data].[dbo].[IPNReconciliation_ArchivingCoreBankingRowTransactions] acbt &quot; &amp; &#xA;        &quot;INNER JOIN [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] rrt &quot; &amp; &#xA;        &quot;ON acbt.AdditionalInfo = rrt.IPNTransactionId &quot; &amp; &#xA;        &quot;WHERE CONVERT(DATE, rrt.ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;' &quot;]">
+        <ui:ExecuteQuery.Parameters>
+          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+        </ui:ExecuteQuery.Parameters>
+      </ui:ExecuteQuery>
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_IPNRowData]" DisplayName="Get IPN Row Data Table" sap:VirtualizedContainerService.HintSize="416,137" sap2010:WorkflowViewState.IdRef="ExecuteQuery_7" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;SELECT airt.* &quot; &amp; &#xA;        &quot;FROM [UiPath Processes Data].[dbo].[IPNReconciliation_ArchivingIPNRowTransactions] airt &quot; &amp; &#xA;        &quot;INNER JOIN [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] rrt &quot; &amp; &#xA;        &quot;ON airt.TransactionId = rrt.IPNTransactionId &quot; &amp; &#xA;        &quot;WHERE CONVERT(DATE, rrt.ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;' &quot;]">
+        <ui:ExecuteQuery.Parameters>
+          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+        </ui:ExecuteQuery.Parameters>
+      </ui:ExecuteQuery>
+    </Sequence>
+    <Sequence DisplayName="Get Data(Values) From DB" sap:VirtualizedContainerService.HintSize="513,57" sap2010:WorkflowViewState.IdRef="Sequence_8">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,173" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;Get Counter And Values From DB&quot;]" />
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_TempValue]" DisplayName="Get IPN Row Data Table" sap:VirtualizedContainerService.HintSize="434,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_8" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;Select COUNT(*) As MatchingCount &quot; &amp; &#xA;        &quot;From [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] &quot; &amp; &#xA;        &quot;Where CONVERT(Date, ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;' &quot; &amp; &#xA;        &quot;AND ReconciliationResult IN ('matched-success', 'matched-failed')&quot;]">
+        <ui:ExecuteQuery.Parameters>
+          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+        </ui:ExecuteQuery.Parameters>
+      </ui:ExecuteQuery>
+      <Assign sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_3">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[str_TotalMatchedTrx]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[dt_TempValue(0)(0).ToString]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_TempValue]" DisplayName="Get IPN Row Data Table" sap:VirtualizedContainerService.HintSize="434,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_9" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;Select COUNT(*) As MatchingCount &quot; &amp; &#xA;        &quot;From [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] &quot; &amp; &#xA;        &quot;Where CONVERT(Date, ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;' &quot; &amp; &#xA;        &quot;AND ReconciliationResult IN ('matched-duplicated')&quot;]">
+        <ui:ExecuteQuery.Parameters>
+          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+        </ui:ExecuteQuery.Parameters>
+      </ui:ExecuteQuery>
+      <Assign sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_4">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[str_TotalMatchedDuplicatedTrx]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[dt_TempValue(0)(0).ToString]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_TempValue]" DisplayName="Get IPN Row Data Table" sap:VirtualizedContainerService.HintSize="434,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_10" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;Select COUNT(*) As MatchingCount &quot; &amp; &#xA;        &quot;From [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] &quot; &amp; &#xA;        &quot;Where CONVERT(Date, ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;' &quot; &amp; &#xA;        &quot;AND ReconciliationResult IN ('not matched')&quot;]">
+        <ui:ExecuteQuery.Parameters>
+          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+        </ui:ExecuteQuery.Parameters>
+      </ui:ExecuteQuery>
+      <Assign sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_5">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[str_TotalMismatchedTrx]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[dt_TempValue(0)(0).ToString]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_TempValue]" DisplayName="Get IPN Row Data Table" sap:VirtualizedContainerService.HintSize="434,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_12" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;Select COUNT(*) As MatchingCount &quot; &amp; &#xA;        &quot;From [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] &quot; &amp; &#xA;        &quot;Where CONVERT(Date, ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;' &quot; &amp; &#xA;        &quot;AND ReconciliationStatus IN ('not reconciled')&quot;]">
+        <ui:ExecuteQuery.Parameters>
+          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+        </ui:ExecuteQuery.Parameters>
+      </ui:ExecuteQuery>
+      <Assign sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_7">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[str_TotalNotReconciledTrx]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[dt_TempValue(0)(0).ToString]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_TempValue]" DisplayName="Get IPN Row Data Table" sap:VirtualizedContainerService.HintSize="434,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_11" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;SELECT SUM(CAST(IPNTransactionAmount AS DECIMAL(18, 2))) AS TotalTransactionAmount &quot; &amp; &#xA;        &quot;FROM [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] &quot; &amp; &#xA;        &quot;WHERE CONVERT(DATE, ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;' &quot; &amp; &#xA;        &quot;AND ReconciliationResult = 'matched-success'&quot;]">
+        <ui:ExecuteQuery.Parameters>
+          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+        </ui:ExecuteQuery.Parameters>
+      </ui:ExecuteQuery>
+      <Assign sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_6">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[str_TotalTrxAmount]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[dt_TempValue(0)(0).ToString]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:Comment sap:VirtualizedContainerService.HintSize="434,88" sap2010:WorkflowViewState.IdRef="Comment_3" Text="Get Summary Value" />
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_TempValue]" DisplayName="Get IPN Row Data Table" sap:VirtualizedContainerService.HintSize="434,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_13" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;SELECT COUNT(*) AS TransactionCount &quot; &amp; &#xA;        &quot;FROM [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] &quot; &amp; &#xA;        &quot;WHERE CONVERT(DATE, ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;' &quot; &amp; &#xA;        &quot;AND CoreBankingPartyType = 'credit' &quot; &amp; &#xA;        &quot;AND ReconciliationResult IN ('matched-success', 'matched-duplicated')&quot;]">
+        <ui:ExecuteQuery.Parameters>
+          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+        </ui:ExecuteQuery.Parameters>
+      </ui:ExecuteQuery>
+      <Assign sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_8">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[str_NoCreditTrx]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[dt_TempValue(0)(0).ToString]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_TempValue]" DisplayName="Get IPN Row Data Table" sap:VirtualizedContainerService.HintSize="434,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_14" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;SELECT COUNT(*) AS TransactionCount &quot; &amp; &#xA;        &quot;FROM [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] &quot; &amp; &#xA;        &quot;WHERE CONVERT(DATE, ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;' &quot; &amp; &#xA;        &quot;AND CoreBankingPartyType = 'debit' &quot; &amp; &#xA;        &quot;AND ReconciliationResult IN ('matched-success', 'matched-duplicated')&quot;]">
+        <ui:ExecuteQuery.Parameters>
+          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+        </ui:ExecuteQuery.Parameters>
+      </ui:ExecuteQuery>
+      <Assign sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_9">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[str_NoDebitTrx]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[dt_TempValue(0)(0).ToString]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_TempValue]" DisplayName="Get IPN Row Data Table" sap:VirtualizedContainerService.HintSize="434,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_15" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;SELECT SUM(CAST(IPNTransactionAmount AS DECIMAL(18, 2))) AS TotalTransactionAmount &quot; &amp; &#xA;        &quot;FROM [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] &quot; &amp; &#xA;        &quot;WHERE CONVERT(DATE, ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;' &quot; &amp; &#xA;        &quot;AND CoreBankingPartyType = 'Credit' &quot; &amp; &#xA;        &quot;AND ReconciliationResult IN ('matched-success', 'matched-duplicated')&quot;]">
+        <ui:ExecuteQuery.Parameters>
+          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+        </ui:ExecuteQuery.Parameters>
+      </ui:ExecuteQuery>
+      <Assign sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_10">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[str_AmountCreditTrx]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[dt_TempValue(0)(0).ToString]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_TempValue]" DisplayName="Get IPN Row Data Table" sap:VirtualizedContainerService.HintSize="434,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_16" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;SELECT SUM(CAST(IPNTransactionAmount AS DECIMAL(18, 2))) AS TotalTransactionAmount &quot; &amp; &#xA;        &quot;FROM [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] &quot; &amp; &#xA;        &quot;WHERE CONVERT(DATE, ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;' &quot; &amp; &#xA;        &quot;AND CoreBankingPartyType = 'depit' &quot; &amp; &#xA;        &quot;AND ReconciliationResult IN ('matched-success', 'matched-duplicated')&quot;]">
+        <ui:ExecuteQuery.Parameters>
+          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+        </ui:ExecuteQuery.Parameters>
+      </ui:ExecuteQuery>
+      <Assign sap:VirtualizedContainerService.HintSize="434,105" sap2010:WorkflowViewState.IdRef="Assign_11">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[str_AmountDebitTrx]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[dt_TempValue(0)(0).ToString]</InArgument>
+        </Assign.Value>
+      </Assign>
+    </Sequence>
+    <Sequence DisplayName="Excel Report Maker" sap:VirtualizedContainerService.HintSize="513,57" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,173" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;Prepare Excel Report &quot;]" />
+      <Assign sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_12">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[str_ReportFilePath]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[in_ReportsFolderPath &amp; "\IPNReconciliation_Daily_Report_" &amp; in_ReportDate &amp; ".xlsx"]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_ReconciledData]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="434,148" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Reconciled_Trx" WorkbookPath="[str_ReportFilePath]" />
+      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_MismatchData]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="434,148" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="Mismatch_Reconciled_Trx" WorkbookPath="[str_ReportFilePath]" />
+      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_NotReconciledData]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="434,148" sap2010:WorkflowViewState.IdRef="WriteRange_3" SheetName="Not_Reconciled_Trx" WorkbookPath="[str_ReportFilePath]" />
+      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_IPNRowData]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="434,148" sap2010:WorkflowViewState.IdRef="WriteRange_4" SheetName="IPN_Raw_Trx" WorkbookPath="[str_ReportFilePath]" />
+      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_CoreBankingRowData]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="434,148" sap2010:WorkflowViewState.IdRef="WriteRange_5" SheetName="Core_Raw_Trx" WorkbookPath="[str_ReportFilePath]" />
+      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_IPNStaged]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="434,148" sap2010:WorkflowViewState.IdRef="WriteRange_6" SheetName="Staged_IPN_Trx" WorkbookPath="[str_ReportFilePath]" />
+      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_CoreStaged]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="434,139" sap2010:WorkflowViewState.IdRef="WriteRange_7" SheetName="Staged_Core_Trx" WorkbookPath="[str_ReportFilePath]" />
+    </Sequence>
+    <Sequence DisplayName="Mail Maker" sap:VirtualizedContainerService.HintSize="513,2078" sap2010:WorkflowViewState.IdRef="Sequence_7">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="479,173" sap2010:WorkflowViewState.IdRef="LogMessage_4" Message="[&quot;Prepare Mail  &quot;]" />
+      <ui:ReadTextFile File="{x:Null}" Content="[str_HtmlMail]" DisplayName="Read Text File" FileName="Html Email Templates\summary.html" sap:VirtualizedContainerService.HintSize="479,112" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+      <Assign sap:VirtualizedContainerService.HintSize="479,115" sap2010:WorkflowViewState.IdRef="Assign_2">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String" xml:space="preserve">&lt;!DOCTYPE html&gt;
+&lt;html lang='en'&gt;
+  &lt;head&gt;
+    &lt;meta charset='UTF-8' /&gt;
+    &lt;meta name='viewport' content='width=device-width, initial-scale=1.0' /&gt;
+    &lt;title&gt;IPN Reconciliation Robot - Daily Summary Report&lt;/title&gt;
+    &lt;!--[if !mso]&gt;&lt;!--&gt;
+    &lt;style&gt;
+      @media screen {
+        .mobile-container {
+          width: 100% !important;
+          padding: 0 10px !important;
+        }
+        .stat-box {
+          display: inline-block !important;
+          width: 280px !important;
+          margin: 10px !important;
+        }
+        .mobile-stack {
+          display: block !important;
+          width: 100% !important;
+        }
+      }
+    &lt;/style&gt;
+    &lt;!--&lt;![endif]--&gt;
+  &lt;/head&gt;
+  &lt;body style='margin: 0; padding: 0; background-color: #f6f9fc'&gt;
+    &lt;table
+      width='100%'
+      cellpadding='0'
+      cellspacing='0'
+      border='0'
+      style='background-color: #f6f9fc; padding: 20px 0'
+    &gt;
+      &lt;tr&gt;
+        &lt;td align='center'&gt;
+          &lt;table
+            class='mobile-container'
+            width='1000'
+            cellpadding='0'
+            cellspacing='0'
+            border='0'
+            style='
+              background-color: #ffffff;
+              border-radius: 8px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+              font-family: Arial, sans-serif;
+            '
+          &gt;
+            &lt;!-- Header --&gt;
+            &lt;tr&gt;
+              &lt;td
+                class='mobile-padding'
+                style='
+                  background-color: #1a73e8;
+                  padding: 30px 20px;
+                  text-align: center;
+                  border-radius: 8px 8px 0 0;
+                '
+              &gt;
+                &lt;h1
+                  style='
+                    margin: 0;
+                    color: #ffffff;
+                    font-size: 24px;
+                    font-weight: 600;
+                  '
+                &gt;
+                  Daily IPN Reconciliation Report
+                &lt;/h1&gt;
+                &lt;p style='margin: 10px 0 0 0; color: #ffffff; font-size: 16px'&gt;
+                  {{ReportDate}}
+                &lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+
+            &lt;!-- Summary Stats --&gt;
+            &lt;tr&gt;
+              &lt;td style='padding: 30px 10px'&gt;
+                &lt;!-- First Row --&gt;
+                &lt;table width='100%' cellpadding='0' cellspacing='0' border='0'&gt;
+                  &lt;tr&gt;
+                    &lt;td
+                      width='25%'
+                      align='center'
+                      style='padding: 0 5px 30px 5px'
+                    &gt;
+                      &lt;table
+                        width='100%'
+                        cellpadding='0'
+                        cellspacing='0'
+                        border='0'
+                        bgcolor='#e3f2fd'
+                        style='border-radius: 8px'
+                      &gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            align='center'
+                            style='padding: 20px; height: 120px'
+                          &gt;
+                            &lt;p
+                              style='
+                                margin: 0 0 5px 0;
+                                color: #1976d2;
+                                font-size: 24px;
+                                font-weight: bold;
+                              '
+                            &gt;
+                              {{TotalReconciledTrx}}
+                            &lt;/p&gt;
+                            &lt;p
+                              style='margin: 0; color: #1976d2; font-size: 14px'
+                            &gt;
+                              Total Reconciled Trx
+                            &lt;/p&gt;
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                      &lt;/table&gt;
+                    &lt;/td&gt;
+                    &lt;td
+                      width='25%'
+                      align='center'
+                      style='padding: 0 5px 30px 5px'
+                    &gt;
+                      &lt;table
+                        width='100%'
+                        cellpadding='0'
+                        cellspacing='0'
+                        border='0'
+                        bgcolor='#f0f9f0'
+                        style='border-radius: 8px'
+                      &gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            align='center'
+                            style='padding: 20px; height: 120px'
+                          &gt;
+                            &lt;p
+                              style='
+                                margin: 0 0 5px 0;
+                                color: #2e7d32;
+                                font-size: 24px;
+                                font-weight: bold;
+                              '
+                            &gt;
+                              {{TotalMatchedTrx}}
+                            &lt;/p&gt;
+                            &lt;p
+                              style='margin: 0; color: #2e7d32; font-size: 14px'
+                            &gt;
+                              Total Matched Trx
+                            &lt;/p&gt;
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                      &lt;/table&gt;
+                    &lt;/td&gt;
+                    &lt;td
+                      width='25%'
+                      align='center'
+                      style='padding: 0 5px 30px 5px'
+                    &gt;
+                      &lt;table
+                        width='100%'
+                        cellpadding='0'
+                        cellspacing='0'
+                        border='0'
+                        bgcolor='#fff8e1'
+                        style='border-radius: 8px'
+                      &gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            align='center'
+                            style='padding: 20px; height: 120px'
+                          &gt;
+                            &lt;p
+                              style='
+                                margin: 0 0 5px 0;
+                                color: #856404;
+                                font-size: 24px;
+                                font-weight: bold;
+                              '
+                            &gt;
+                              {{TotalMatchedDuplicatedTrx}}
+                            &lt;/p&gt;
+                            &lt;p
+                              style='margin: 0; color: #856404; font-size: 14px'
+                            &gt;
+                              Matched-Duplicated
+                            &lt;/p&gt;
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                      &lt;/table&gt;
+                    &lt;/td&gt;
+                    &lt;td
+                      width='25%'
+                      align='center'
+                      style='padding: 0 5px 30px 5px'
+                    &gt;
+                      &lt;table
+                        width='100%'
+                        cellpadding='0'
+                        cellspacing='0'
+                        border='0'
+                        bgcolor='#fff5f5'
+                        style='border-radius: 8px'
+                      &gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            align='center'
+                            style='padding: 20px; height: 120px'
+                          &gt;
+                            &lt;p
+                              style='
+                                margin: 0 0 5px 0;
+                                color: #dc3545;
+                                font-size: 24px;
+                                font-weight: bold;
+                              '
+                            &gt;
+                              {{TotalMismatchedTrx}}
+                            &lt;/p&gt;
+                            &lt;p
+                              style='margin: 0; color: #dc3545; font-size: 14px'
+                            &gt;
+                              Total Mismatched
+                            &lt;/p&gt;
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                      &lt;/table&gt;
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/table&gt;
+
+                &lt;!-- Second Row --&gt;
+                &lt;table width='100%' cellpadding='0' cellspacing='0' border='0'&gt;
+                  &lt;tr&gt;
+                    &lt;td width='25%' align='center' style='padding: 0 5px'&gt;
+                      &lt;table
+                        width='100%'
+                        cellpadding='0'
+                        cellspacing='0'
+                        border='0'
+                        bgcolor='#fce4ec'
+                        style='border-radius: 8px'
+                      &gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            align='center'
+                            style='padding: 20px; height: 120px'
+                          &gt;
+                            &lt;p
+                              style='
+                                margin: 0 0 5px 0;
+                                color: #c2185b;
+                                font-size: 24px;
+                                font-weight: bold;
+                              '
+                            &gt;
+                              {{TotalNotReconciledTrx}}
+                            &lt;/p&gt;
+                            &lt;p
+                              style='margin: 0; color: #c2185b; font-size: 14px'
+                            &gt;
+                              Not Reconciled (New Case)
+                            &lt;/p&gt;
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                      &lt;/table&gt;
+                    &lt;/td&gt;
+                    &lt;td width='25%' align='center' style='padding: 0 5px'&gt;
+                      &lt;table
+                        width='100%'
+                        cellpadding='0'
+                        cellspacing='0'
+                        border='0'
+                        bgcolor='#f3e5f5'
+                        style='border-radius: 8px'
+                      &gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            align='center'
+                            style='padding: 20px; height: 120px'
+                          &gt;
+                            &lt;p
+                              style='
+                                margin: 0 0 5px 0;
+                                color: #7b1fa2;
+                                font-size: 24px;
+                                font-weight: bold;
+                              '
+                            &gt;
+                              {{StagedIPNTrx}}
+                            &lt;/p&gt;
+                            &lt;p
+                              style='margin: 0; color: #7b1fa2; font-size: 14px'
+                            &gt;
+                              Staged IPN Trx
+                            &lt;/p&gt;
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                      &lt;/table&gt;
+                    &lt;/td&gt;
+                    &lt;td width='25%' align='center' style='padding: 0 5px'&gt;
+                      &lt;table
+                        width='100%'
+                        cellpadding='0'
+                        cellspacing='0'
+                        border='0'
+                        bgcolor='#e8f5e9'
+                        style='border-radius: 8px'
+                      &gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            align='center'
+                            style='padding: 20px; height: 120px'
+                          &gt;
+                            &lt;p
+                              style='
+                                margin: 0 0 5px 0;
+                                color: #2e7d32;
+                                font-size: 24px;
+                                font-weight: bold;
+                              '
+                            &gt;
+                              {{StagedCoreTrx}}
+                            &lt;/p&gt;
+                            &lt;p
+                              style='margin: 0; color: #2e7d32; font-size: 14px'
+                            &gt;
+                              Staged Core Trx
+                            &lt;/p&gt;
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                      &lt;/table&gt;
+                    &lt;/td&gt;
+                    &lt;td width='25%' align='center' style='padding: 0 5px'&gt;
+                      &lt;table
+                        width='100%'
+                        cellpadding='0'
+                        cellspacing='0'
+                        border='0'
+                        bgcolor='#e3f2fd'
+                        style='border-radius: 8px'
+                      &gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            align='center'
+                            style='padding: 20px; height: 120px'
+                          &gt;
+                            &lt;p
+                              style='
+                                margin: 0 0 5px 0;
+                                color: #1976d2;
+                                font-size: 24px;
+                                font-weight: bold;
+                              '
+                            &gt;
+                              {{TotalTrxAmount}}
+                            &lt;/p&gt;
+                            &lt;p
+                              style='margin: 0; color: #1976d2; font-size: 14px'
+                            &gt;
+                              Total Trx Amount
+                            &lt;/p&gt;
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                      &lt;/table&gt;
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/table&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+
+            &lt;!-- Processing Summary --&gt;
+            &lt;tr&gt;
+              &lt;td class='mobile-padding' style='padding: 0 20px 30px 20px'&gt;
+                &lt;table
+                  width='100%'
+                  cellpadding='0'
+                  cellspacing='0'
+                  border='0'
+                  style='
+                    background-color: #f8f9fa;
+                    border-radius: 8px;
+                    padding: 20px;
+                  '
+                &gt;
+                  &lt;tr&gt;
+                    &lt;td&gt;
+                      &lt;h3
+                        style='
+                          margin: 0 0 15px 0;
+                          color: #333333;
+                          font-size: 18px;
+                        '
+                      &gt;
+                        Processing Summary
+                      &lt;/h3&gt;
+                      &lt;table
+                        class='mobile-full'
+                        width='100%'
+                        cellpadding='8'
+                        cellspacing='0'
+                        border='0'
+                      &gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            class='mobile-stack mobile-small-text'
+                            style='color: #555555; font-size: 14px'
+                          &gt;
+                            Total Reconciled Transactions:
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-stack mobile-small-text'
+                            style='
+                              color: #333333;
+                              font-weight: bold;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            {{TotalReconciledTransactions}}
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            class='mobile-stack mobile-small-text'
+                            style='color: #555555; font-size: 14px'
+                          &gt;
+                            No. Debit Transactions(Matched):
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-stack mobile-small-text'
+                            style='
+                              color: #333333;
+                              font-weight: bold;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            {{NoDebitTrx}}
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            class='mobile-stack mobile-small-text'
+                            style='color: #555555; font-size: 14px'
+                          &gt;
+                            Amount Debit Transactions(Matched):
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-stack mobile-small-text'
+                            style='
+                              color: #333333;
+                              font-weight: bold;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            {{AmountDebitTrx}}
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            class='mobile-stack mobile-small-text'
+                            style='color: #555555; font-size: 14px'
+                          &gt;
+                            No. Credit Transactions(Matched):
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-stack mobile-small-text'
+                            style='
+                              color: #333333;
+                              font-weight: bold;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            {{NoCreditTrx}}
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            class='mobile-stack mobile-small-text'
+                            style='color: #555555; font-size: 14px'
+                          &gt;
+                            Amount Credit Transactions(Matched):
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-stack mobile-small-text'
+                            style='
+                              color: #333333;
+                              font-weight: bold;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            {{AmountCreditTrx}}
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            class='mobile-stack mobile-small-text'
+                            style='color: #555555; font-size: 14px'
+                          &gt;
+                            Matching Reconciliation Rate:
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-stack mobile-small-text'
+                            style='
+                              color: #333333;
+                              font-weight: bold;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            {{MatchingReconciliationRate}}%
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                      &lt;/table&gt;
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/table&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+
+            &lt;!-- Attached Sheets --&gt;
+            &lt;tr&gt;
+              &lt;td class='mobile-padding' style='padding: 0 20px 30px 20px'&gt;
+                &lt;table width='100%' cellpadding='0' cellspacing='0' border='0'&gt;
+                  &lt;tr&gt;
+                    &lt;td style='padding-bottom: 15px'&gt;
+                      &lt;h3 style='margin: 0; color: #333333; font-size: 18px'&gt;
+                        Attached Sheet
+                      &lt;/h3&gt;
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                  &lt;tr&gt;
+                    &lt;td class='mobile-table'&gt;
+                      &lt;table
+                        width='100%'
+                        cellpadding='8'
+                        cellspacing='0'
+                        border='0'
+                        style='border: 1px solid #e0e0e0; border-radius: 4px'
+                      &gt;
+                        &lt;tr style='background-color: #f8f9fa'&gt;
+                          &lt;th
+                            class='mobile-small-text'
+                            style='
+                              text-align: left;
+                              padding: 12px;
+                              border-bottom: 2px solid #e0e0e0;
+                              color: #555555;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            Sheet Name
+                          &lt;/th&gt;
+                          &lt;th
+                            class='mobile-small-text'
+                            style='
+                              text-align: left;
+                              padding: 12px;
+                              border-bottom: 2px solid #e0e0e0;
+                              color: #555555;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            Description
+                          &lt;/th&gt;
+                          &lt;th
+                            class='mobile-small-text'
+                            style='
+                              text-align: left;
+                              padding: 12px;
+                              border-bottom: 2px solid #e0e0e0;
+                              color: #555555;
+                              font-size: 14px;
+                              width: 100px;
+                            '
+                          &gt;
+                            No. Of Records
+                          &lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #1a73e8;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            Reconciled Trx
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            Complete list of reconciled transactions with
+                            matching details
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            {{ReconciledTrxSize}}
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #1a73e8;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            Mismatch Reconciled Trx
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            List of mismatched reconciled transactions
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            {{MismatchReconciledTrxSize}}
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #1a73e8;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            Not Reconciled Trx
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            List of transactions not reconciled
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            {{NotReconciledTrxSize}}
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #1a73e8;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            IPN Raw Trx
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            Raw IPN transaction data used in reconciliation
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            {{IPNRawSize}}
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #1a73e8;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            Core Raw Trx
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            Raw Core Banking transaction data used in
+                            reconciliation
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            {{CoreRawSize}}
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #1a73e8;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            Staged IPN Trx
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            List of IPN transactions pending reconciliation
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            {{StagedIPNSize}}
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #1a73e8;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            Staged Core Trx
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            List of Core Banking transactions pending
+                            reconciliation
+                          &lt;/td&gt;
+                          &lt;td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          &gt;
+                            {{StagedCoreSize}}
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                      &lt;/table&gt;
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                  &lt;tr&gt;
+                    &lt;td style='padding-top: 10px'&gt;
+                      &lt;p
+                        style='
+                          margin: 0;
+                          color: #666666;
+                          font-size: 13px;
+                          font-style: italic;
+                        '
+                      &gt;
+                        * All Sheets in Attached Workbook
+                      &lt;/p&gt;
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/table&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+
+            &lt;!-- Action Items --&gt;
+            &lt;tr&gt;
+              &lt;td class='mobile-padding' style='padding: 0 20px 30px 20px'&gt;
+                &lt;table width='100%' cellpadding='0' cellspacing='0' border='0'&gt;
+                  &lt;tr&gt;
+                    &lt;td
+                      style='
+                        padding: 20px;
+                        background-color: #e8f0fe;
+                        border-left: 4px solid #1a73e8;
+                        border-radius: 4px;
+                      '
+                    &gt;
+                      &lt;h3
+                        style='
+                          margin: 0 0 12px 0;
+                          color: #1a73e8;
+                          font-size: 18px;
+                        '
+                      &gt;
+                        Important Notes &amp; Recommendations
+                      &lt;/h3&gt;
+                      &lt;div
+                        style='
+                          color: #333333;
+                          font-size: 14px;
+                          line-height: 1.6;
+                        '
+                      &gt;
+                        &lt;p style='margin: 0 0 10px 0'&gt;
+                          1. Please review the attached sheets for detailed
+                          transaction records and reconciliation status.
+                        &lt;/p&gt;
+                        &lt;p style='margin: 0 0 10px 0'&gt;
+                          2. Pay special attention to any mismatched or
+                          unreconciled transactions that may require immediate
+                          action.
+                        &lt;/p&gt;
+                        &lt;p style='margin: 0 0 10px 0'&gt;
+                          3. The matching reconciliation rate of
+                          {{MatchingReconciliationRate}}% indicates the overall
+                          system performance.
+                        &lt;/p&gt;
+                      &lt;/div&gt;
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/table&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+
+            &lt;!-- Footer --&gt;
+            &lt;tr&gt;
+              &lt;td
+                class='mobile-padding'
+                style='
+                  background-color: #f8f9fa;
+                  padding: 20px;
+                  text-align: center;
+                  border-radius: 0 0 8px 8px;
+                '
+              &gt;
+                &lt;p
+                  class='mobile-small-text'
+                  style='margin: 0; color: #666666; font-size: 14px'
+                &gt;
+                  This is an automated daily report from the IPN Reconciliation
+                  Robot.
+                &lt;/p&gt;
+                &lt;p
+                  class='mobile-small-text'
+                  style='margin: 8px 0 0 0; color: #666666; font-size: 12px'
+                &gt;
+                  Generated on {{GeneratedDateTime}}
+                &lt;/p&gt;
+                &lt;p
+                  class='mobile-small-text'
+                  style='margin: 8px 0 0 0; color: #666666; font-size: 12px'
+                &gt;
+                  Happy Automation
+                &lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/table&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:Comment sap:VirtualizedContainerService.HintSize="479,88" sap2010:WorkflowViewState.IdRef="Comment_1" Text="Update Headers &amp; Meta Data Values" />
+      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,241" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
+        <ui:MultipleAssign.AssignOperations>
+          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_22">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{ReportDate}}",DateTime.ParseExact(in_ReportDate, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MMM-dd"))]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_23">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{GeneratedDateTime}}",DateTime.Now.ToString("yyyy-MMM-dd"))]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_24">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{#ActionItems1}}","")]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_25">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{/ActionItems2}}","")]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+          </scg:List>
+        </ui:MultipleAssign.AssignOperations>
+      </ui:MultipleAssign>
+      <ui:Comment sap:VirtualizedContainerService.HintSize="479,88" sap2010:WorkflowViewState.IdRef="Comment_5" Text="Update Counters Values" />
+      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,365" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+        <ui:MultipleAssign.AssignOperations>
+          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{TotalReconciledTrx}}",dt_ReconciledData.Rows.Count.ToString)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{TotalMatchedTrx}}",str_TotalMatchedTrx)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{TotalMatchedDuplicatedTrx}}",str_TotalMatchedDuplicatedTrx)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{TotalMismatchedTrx}}",str_TotalMismatchedTrx)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{TotalNotReconciledTrx}}",str_TotalNotReconciledTrx)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{StagedIPNTrx}}",dt_IPNStaged.Rows.Count.ToString)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{StagedCoreTrx}}",dt_CoreStaged.Rows.Count.ToString)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{TotalTrxAmount}}",str_TotalTrxAmount)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+          </scg:List>
+        </ui:MultipleAssign.AssignOperations>
+      </ui:MultipleAssign>
+      <ui:Comment sap:VirtualizedContainerService.HintSize="479,88" sap2010:WorkflowViewState.IdRef="Comment_2" Text="Update Summary Values" />
+      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,303" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+        <ui:MultipleAssign.AssignOperations>
+          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{TotalReconciledTransactions}}",dt_ReconciledData.Rows.Count.ToString)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{NoDebitTrx}}",str_NoDebitTrx)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_11">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{AmountDebitTrx}}",str_AmountDebitTrx)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{NoCreditTrx}}",str_NoCreditTrx)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_13">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{AmountCreditTrx}}",str_AmountCreditTrx)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_14">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{MatchingReconciliationRate}}","30")]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+          </scg:List>
+        </ui:MultipleAssign.AssignOperations>
+      </ui:MultipleAssign>
+      <ui:Comment sap:VirtualizedContainerService.HintSize="479,88" sap2010:WorkflowViewState.IdRef="Comment_4" Text="Update No Of Records in Attached Sheet" />
+      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,325" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
+        <ui:MultipleAssign.AssignOperations>
+          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_15">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{ReconciledTrxSize}}",dt_ReconciledData.Rows.Count.ToString)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_16">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{MismatchReconciledTrxSize}}",dt_MismatchData.Rows.Count.ToString)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_17">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{NotReconciledTrxSize}}",dt_NotReconciledData.Rows.Count.ToString)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_18">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{IPNRawSize}}",dt_IPNRowData.Rows.Count.ToString)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_19">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{CoreRawSize}}",dt_CoreBankingRowData.Rows.Count.ToString)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_20">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{StagedIPNSize}}",dt_IPNStaged.Rows.Count.ToString)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_21">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{StagedCoreSize}}",dt_CoreStaged.Rows.Count.ToString)]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+          </scg:List>
+        </ui:MultipleAssign.AssignOperations>
+      </ui:MultipleAssign>
+    </Sequence>
+    <Sequence DisplayName="Send Mail " sap:VirtualizedContainerService.HintSize="513,431" sap2010:WorkflowViewState.IdRef="Sequence_4">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,173" sap2010:WorkflowViewState.IdRef="LogMessage_5" Message="[&quot;Send Mail&quot;]" />
+      <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" ContinueOnError="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" TimeoutMS="{x:Null}" Body="[str_HtmlMail]" Cc="[in_CCEmailRecivers]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" Importance="Normal" IsBodyHtml="True" IsDraft="False" Sensitivity="Normal" Subject="test" To="[in_EmailRecivers]" UseISConnection="True">
+        <ui:SendOutlookMail.ConnectionDetailsBackupSlot>
+          <usau:BackupSlot x:TypeArguments="umae:ConnectionDetails" StoredValue="{x:Null}">
+            <usau:BackupSlot.BackupValues>
+              <scg:Dictionary x:TypeArguments="umae:ConnectionDetails, scg:List(x:Object)" />
+            </usau:BackupSlot.BackupValues>
+          </usau:BackupSlot>
+        </ui:SendOutlookMail.ConnectionDetailsBackupSlot>
+        <ui:SendOutlookMail.Files>
+          <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+            <InArgument x:TypeArguments="x:String">[str_ReportFilePath]</InArgument>
+          </scg:List>
+        </ui:SendOutlookMail.Files>
+      </ui:SendOutlookMail>
+    </Sequence>
+  </Sequence>
+</Activity>

@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>IPN Reconciliation Robot - Daily Summary Report</title>
+    <!--[if !mso]><!-->
+    <style>
+      @media screen {
+        .mobile-container {
+          width: 100% !important;
+          padding: 0 10px !important;
+        }
+        .stat-box {
+          display: inline-block !important;
+          width: 280px !important;
+          margin: 10px !important;
+        }
+        .mobile-stack {
+          display: block !important;
+          width: 100% !important;
+        }
+      }
+    </style>
+    <!--<![endif]-->
+  </head>
+  <body style='margin: 0; padding: 0; background-color: #f6f9fc'>
+    <table
+      width='100%'
+      cellpadding='0'
+      cellspacing='0'
+      border='0'
+      style='background-color: #f6f9fc; padding: 20px 0'
+    >
+      <tr>
+        <td align='center'>
+          <table
+            class='mobile-container'
+            width='1000'
+            cellpadding='0'
+            cellspacing='0'
+            border='0'
+            style='
+              background-color: #ffffff;
+              border-radius: 8px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+              font-family: Arial, sans-serif;
+            '
+          >
+            <!-- Header -->
+            <tr>
+              <td
+                class='mobile-padding'
+                style='
+                  background-color: #1a73e8;
+                  padding: 30px 20px;
+                  text-align: center;
+                  border-radius: 8px 8px 0 0;
+                '
+              >
+                <h1
+                  style='
+                    margin: 0;
+                    color: #ffffff;
+                    font-size: 24px;
+                    font-weight: 600;
+                  '
+                >
+                  Daily IPN Reconciliation Report
+                </h1>
+                <p style='margin: 10px 0 0 0; color: #ffffff; font-size: 16px'>
+                  {{ReportDate}}
+                </p>
+              </td>
+            </tr>
+
+            <!-- Summary Stats -->
+            <tr>
+              <td style='padding: 30px 10px'>
+                <!-- First Row -->
+                <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+                  <tr>
+                    <td
+                      width='25%'
+                      align='center'
+                      style='padding: 0 5px 30px 5px'
+                    >
+                      <table
+                        width='100%'
+                        cellpadding='0'
+                        cellspacing='0'
+                        border='0'
+                        bgcolor='#e3f2fd'
+                        style='border-radius: 8px'
+                      >
+                        <tr>
+                          <td
+                            align='center'
+                            style='padding: 20px; height: 120px'
+                          >
+                            <p
+                              style='
+                                margin: 0 0 5px 0;
+                                color: #1976d2;
+                                font-size: 24px;
+                                font-weight: bold;
+                              '
+                            >
+                              {{TotalReconciledTrx}}
+                            </p>
+                            <p
+                              style='margin: 0; color: #1976d2; font-size: 14px'
+                            >
+                              Total Reconciled Trx
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td
+                      width='25%'
+                      align='center'
+                      style='padding: 0 5px 30px 5px'
+                    >
+                      <table
+                        width='100%'
+                        cellpadding='0'
+                        cellspacing='0'
+                        border='0'
+                        bgcolor='#f0f9f0'
+                        style='border-radius: 8px'
+                      >
+                        <tr>
+                          <td
+                            align='center'
+                            style='padding: 20px; height: 120px'
+                          >
+                            <p
+                              style='
+                                margin: 0 0 5px 0;
+                                color: #2e7d32;
+                                font-size: 24px;
+                                font-weight: bold;
+                              '
+                            >
+                              {{TotalMatchedTrx}}
+                            </p>
+                            <p
+                              style='margin: 0; color: #2e7d32; font-size: 14px'
+                            >
+                              Total Matched Trx
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td
+                      width='25%'
+                      align='center'
+                      style='padding: 0 5px 30px 5px'
+                    >
+                      <table
+                        width='100%'
+                        cellpadding='0'
+                        cellspacing='0'
+                        border='0'
+                        bgcolor='#fff8e1'
+                        style='border-radius: 8px'
+                      >
+                        <tr>
+                          <td
+                            align='center'
+                            style='padding: 20px; height: 120px'
+                          >
+                            <p
+                              style='
+                                margin: 0 0 5px 0;
+                                color: #856404;
+                                font-size: 24px;
+                                font-weight: bold;
+                              '
+                            >
+                              {{TotalMatchedDuplicatedTrx}}
+                            </p>
+                            <p
+                              style='margin: 0; color: #856404; font-size: 14px'
+                            >
+                              Matched-Duplicated
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td
+                      width='25%'
+                      align='center'
+                      style='padding: 0 5px 30px 5px'
+                    >
+                      <table
+                        width='100%'
+                        cellpadding='0'
+                        cellspacing='0'
+                        border='0'
+                        bgcolor='#fff5f5'
+                        style='border-radius: 8px'
+                      >
+                        <tr>
+                          <td
+                            align='center'
+                            style='padding: 20px; height: 120px'
+                          >
+                            <p
+                              style='
+                                margin: 0 0 5px 0;
+                                color: #dc3545;
+                                font-size: 24px;
+                                font-weight: bold;
+                              '
+                            >
+                              {{TotalMismatchedTrx}}
+                            </p>
+                            <p
+                              style='margin: 0; color: #dc3545; font-size: 14px'
+                            >
+                              Total Mismatched
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Second Row -->
+                <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+                  <tr>
+                    <td width='25%' align='center' style='padding: 0 5px'>
+                      <table
+                        width='100%'
+                        cellpadding='0'
+                        cellspacing='0'
+                        border='0'
+                        bgcolor='#fce4ec'
+                        style='border-radius: 8px'
+                      >
+                        <tr>
+                          <td
+                            align='center'
+                            style='padding: 20px; height: 120px'
+                          >
+                            <p
+                              style='
+                                margin: 0 0 5px 0;
+                                color: #c2185b;
+                                font-size: 24px;
+                                font-weight: bold;
+                              '
+                            >
+                              {{TotalNotReconciledTrx}}
+                            </p>
+                            <p
+                              style='margin: 0; color: #c2185b; font-size: 14px'
+                            >
+                              Not Reconciled (New Case)
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td width='25%' align='center' style='padding: 0 5px'>
+                      <table
+                        width='100%'
+                        cellpadding='0'
+                        cellspacing='0'
+                        border='0'
+                        bgcolor='#f3e5f5'
+                        style='border-radius: 8px'
+                      >
+                        <tr>
+                          <td
+                            align='center'
+                            style='padding: 20px; height: 120px'
+                          >
+                            <p
+                              style='
+                                margin: 0 0 5px 0;
+                                color: #7b1fa2;
+                                font-size: 24px;
+                                font-weight: bold;
+                              '
+                            >
+                              {{StagedIPNTrx}}
+                            </p>
+                            <p
+                              style='margin: 0; color: #7b1fa2; font-size: 14px'
+                            >
+                              Staged IPN Trx
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td width='25%' align='center' style='padding: 0 5px'>
+                      <table
+                        width='100%'
+                        cellpadding='0'
+                        cellspacing='0'
+                        border='0'
+                        bgcolor='#e8f5e9'
+                        style='border-radius: 8px'
+                      >
+                        <tr>
+                          <td
+                            align='center'
+                            style='padding: 20px; height: 120px'
+                          >
+                            <p
+                              style='
+                                margin: 0 0 5px 0;
+                                color: #2e7d32;
+                                font-size: 24px;
+                                font-weight: bold;
+                              '
+                            >
+                              {{StagedCoreTrx}}
+                            </p>
+                            <p
+                              style='margin: 0; color: #2e7d32; font-size: 14px'
+                            >
+                              Staged Core Trx
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td width='25%' align='center' style='padding: 0 5px'>
+                      <table
+                        width='100%'
+                        cellpadding='0'
+                        cellspacing='0'
+                        border='0'
+                        bgcolor='#e3f2fd'
+                        style='border-radius: 8px'
+                      >
+                        <tr>
+                          <td
+                            align='center'
+                            style='padding: 20px; height: 120px'
+                          >
+                            <p
+                              style='
+                                margin: 0 0 5px 0;
+                                color: #1976d2;
+                                font-size: 24px;
+                                font-weight: bold;
+                              '
+                            >
+                              {{TotalTrxAmount}}
+                            </p>
+                            <p
+                              style='margin: 0; color: #1976d2; font-size: 14px'
+                            >
+                              Total Trx Amount
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Processing Summary -->
+            <tr>
+              <td class='mobile-padding' style='padding: 0 20px 30px 20px'>
+                <table
+                  width='100%'
+                  cellpadding='0'
+                  cellspacing='0'
+                  border='0'
+                  style='
+                    background-color: #f8f9fa;
+                    border-radius: 8px;
+                    padding: 20px;
+                  '
+                >
+                  <tr>
+                    <td>
+                      <h3
+                        style='
+                          margin: 0 0 15px 0;
+                          color: #333333;
+                          font-size: 18px;
+                        '
+                      >
+                        Processing Summary
+                      </h3>
+                      <table
+                        class='mobile-full'
+                        width='100%'
+                        cellpadding='8'
+                        cellspacing='0'
+                        border='0'
+                      >
+                        <tr>
+                          <td
+                            class='mobile-stack mobile-small-text'
+                            style='color: #555555; font-size: 14px'
+                          >
+                            Total Reconciled Transactions:
+                          </td>
+                          <td
+                            class='mobile-stack mobile-small-text'
+                            style='
+                              color: #333333;
+                              font-weight: bold;
+                              font-size: 14px;
+                            '
+                          >
+                            {{TotalReconciledTransactions}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            class='mobile-stack mobile-small-text'
+                            style='color: #555555; font-size: 14px'
+                          >
+                            No. Debit Transactions(Matched):
+                          </td>
+                          <td
+                            class='mobile-stack mobile-small-text'
+                            style='
+                              color: #333333;
+                              font-weight: bold;
+                              font-size: 14px;
+                            '
+                          >
+                            {{NoDebitTrx}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            class='mobile-stack mobile-small-text'
+                            style='color: #555555; font-size: 14px'
+                          >
+                            Amount Debit Transactions(Matched):
+                          </td>
+                          <td
+                            class='mobile-stack mobile-small-text'
+                            style='
+                              color: #333333;
+                              font-weight: bold;
+                              font-size: 14px;
+                            '
+                          >
+                            {{AmountDebitTrx}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            class='mobile-stack mobile-small-text'
+                            style='color: #555555; font-size: 14px'
+                          >
+                            No. Credit Transactions(Matched):
+                          </td>
+                          <td
+                            class='mobile-stack mobile-small-text'
+                            style='
+                              color: #333333;
+                              font-weight: bold;
+                              font-size: 14px;
+                            '
+                          >
+                            {{NoCreditTrx}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            class='mobile-stack mobile-small-text'
+                            style='color: #555555; font-size: 14px'
+                          >
+                            Amount Credit Transactions(Matched):
+                          </td>
+                          <td
+                            class='mobile-stack mobile-small-text'
+                            style='
+                              color: #333333;
+                              font-weight: bold;
+                              font-size: 14px;
+                            '
+                          >
+                            {{AmountCreditTrx}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            class='mobile-stack mobile-small-text'
+                            style='color: #555555; font-size: 14px'
+                          >
+                            Matching Reconciliation Rate:
+                          </td>
+                          <td
+                            class='mobile-stack mobile-small-text'
+                            style='
+                              color: #333333;
+                              font-weight: bold;
+                              font-size: 14px;
+                            '
+                          >
+                            {{MatchingReconciliationRate}}%
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Attached Sheets -->
+            <tr>
+              <td class='mobile-padding' style='padding: 0 20px 30px 20px'>
+                <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+                  <tr>
+                    <td style='padding-bottom: 15px'>
+                      <h3 style='margin: 0; color: #333333; font-size: 18px'>
+                        Attached Sheet
+                      </h3>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class='mobile-table'>
+                      <table
+                        width='100%'
+                        cellpadding='8'
+                        cellspacing='0'
+                        border='0'
+                        style='border: 1px solid #e0e0e0; border-radius: 4px'
+                      >
+                        <tr style='background-color: #f8f9fa'>
+                          <th
+                            class='mobile-small-text'
+                            style='
+                              text-align: left;
+                              padding: 12px;
+                              border-bottom: 2px solid #e0e0e0;
+                              color: #555555;
+                              font-size: 14px;
+                            '
+                          >
+                            Sheet Name
+                          </th>
+                          <th
+                            class='mobile-small-text'
+                            style='
+                              text-align: left;
+                              padding: 12px;
+                              border-bottom: 2px solid #e0e0e0;
+                              color: #555555;
+                              font-size: 14px;
+                            '
+                          >
+                            Description
+                          </th>
+                          <th
+                            class='mobile-small-text'
+                            style='
+                              text-align: left;
+                              padding: 12px;
+                              border-bottom: 2px solid #e0e0e0;
+                              color: #555555;
+                              font-size: 14px;
+                              width: 100px;
+                            '
+                          >
+                            No. Of Records
+                          </th>
+                        </tr>
+                        <tr>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #1a73e8;
+                              font-size: 14px;
+                            '
+                          >
+                            Reconciled Trx
+                          </td>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          >
+                            Complete list of reconciled transactions with
+                            matching details
+                          </td>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          >
+                            {{ReconciledTrxSize}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #1a73e8;
+                              font-size: 14px;
+                            '
+                          >
+                            Mismatch Reconciled Trx
+                          </td>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          >
+                            List of mismatched reconciled transactions
+                          </td>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          >
+                            {{MismatchReconciledTrxSize}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #1a73e8;
+                              font-size: 14px;
+                            '
+                          >
+                            Not Reconciled Trx
+                          </td>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          >
+                            List of transactions not reconciled
+                          </td>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          >
+                            {{NotReconciledTrxSize}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #1a73e8;
+                              font-size: 14px;
+                            '
+                          >
+                            IPN Raw Trx
+                          </td>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          >
+                            Raw IPN transaction data used in reconciliation
+                          </td>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          >
+                            {{IPNRawSize}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #1a73e8;
+                              font-size: 14px;
+                            '
+                          >
+                            Core Raw Trx
+                          </td>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          >
+                            Raw Core Banking transaction data used in
+                            reconciliation
+                          </td>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          >
+                            {{CoreRawSize}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #1a73e8;
+                              font-size: 14px;
+                            '
+                          >
+                            Staged IPN Trx
+                          </td>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          >
+                            List of IPN transactions pending reconciliation
+                          </td>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          >
+                            {{StagedIPNSize}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #1a73e8;
+                              font-size: 14px;
+                            '
+                          >
+                            Staged Core Trx
+                          </td>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          >
+                            List of Core Banking transactions pending
+                            reconciliation
+                          </td>
+                          <td
+                            class='mobile-small-text'
+                            style='
+                              padding: 12px;
+                              border-bottom: 1px solid #e0e0e0;
+                              color: #666666;
+                              font-size: 14px;
+                            '
+                          >
+                            {{StagedCoreSize}}
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style='padding-top: 10px'>
+                      <p
+                        style='
+                          margin: 0;
+                          color: #666666;
+                          font-size: 13px;
+                          font-style: italic;
+                        '
+                      >
+                        * All Sheets in Attached Workbook
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Action Items -->
+            <tr>
+              <td class='mobile-padding' style='padding: 0 20px 30px 20px'>
+                <table width='100%' cellpadding='0' cellspacing='0' border='0'>
+                  <tr>
+                    <td
+                      style='
+                        padding: 20px;
+                        background-color: #e8f0fe;
+                        border-left: 4px solid #1a73e8;
+                        border-radius: 4px;
+                      '
+                    >
+                      <h3
+                        style='
+                          margin: 0 0 12px 0;
+                          color: #1a73e8;
+                          font-size: 18px;
+                        '
+                      >
+                        Important Notes & Recommendations
+                      </h3>
+                      <div
+                        style='
+                          color: #333333;
+                          font-size: 14px;
+                          line-height: 1.6;
+                        '
+                      >
+                        <p style='margin: 0 0 10px 0'>
+                          1. Please review the attached sheets for detailed
+                          transaction records and reconciliation status.
+                        </p>
+                        <p style='margin: 0 0 10px 0'>
+                          2. Pay special attention to any mismatched or
+                          unreconciled transactions that may require immediate
+                          action.
+                        </p>
+                        <p style='margin: 0 0 10px 0'>
+                          3. The matching reconciliation rate of
+                          {{MatchingReconciliationRate}}% indicates the overall
+                          system performance.
+                        </p>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td
+                class='mobile-padding'
+                style='
+                  background-color: #f8f9fa;
+                  padding: 20px;
+                  text-align: center;
+                  border-radius: 0 0 8px 8px;
+                '
+              >
+                <p
+                  class='mobile-small-text'
+                  style='margin: 0; color: #666666; font-size: 14px'
+                >
+                  This is an automated daily report from the IPN Reconciliation
+                  Robot.
+                </p>
+                <p
+                  class='mobile-small-text'
+                  style='margin: 8px 0 0 0; color: #666666; font-size: 12px'
+                >
+                  Generated on {{GeneratedDateTime}}
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

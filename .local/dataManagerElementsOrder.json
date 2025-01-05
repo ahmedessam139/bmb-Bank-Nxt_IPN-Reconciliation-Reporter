@@ -1,0 +1,232 @@
+{
+  "Workflows": [
+    {
+      "Path": null,
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [],
+      "ArgumentsSectionElementsOrder": null,
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Main.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "SystemError&StateMachine_1",
+        "BusinessRuleException&StateMachine_1",
+        "Config&StateMachine_1",
+        "RetryNumber&StateMachine_1",
+        "BrowserStillOpen&TryCatch_6",
+        "str_HtmlMailBody&Sequence_10",
+        "str_ScreenshotsPath&Sequence_10",
+        "BrowserStillOpen&TryCatch_3"
+      ],
+      "ArgumentsSectionElementsOrder": [],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Test.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [],
+      "ArgumentsSectionElementsOrder": [],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Process.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [],
+      "ArgumentsSectionElementsOrder": [
+        "in_Config"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Framework/CreateProjectFolders.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "str_ProjectRootPath&Sequence_1",
+        "str_FolderRelativePath&Sequence_1",
+        "str_FilesCommonPath&Sequence_1",
+        "str_FullFolderPath&Sequence_3",
+        "str_FullFolderPath&Sequence_14"
+      ],
+      "ArgumentsSectionElementsOrder": [
+        "in_Config"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Framework/InitAllSettings.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "configTable&Sequence_5",
+        "assets&Sequence_6",
+        "assetValue&Sequence_11"
+      ],
+      "ArgumentsSectionElementsOrder": [
+        "in_ConfigFile",
+        "in_ConfigSheets",
+        "out_Config"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Framework/KillAllProcesses.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [],
+      "ArgumentsSectionElementsOrder": [
+        "in_AppsToKill"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Bots/Get IPN File.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [],
+      "ArgumentsSectionElementsOrder": [],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Bots/Get Core Banking File.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [],
+      "ArgumentsSectionElementsOrder": [],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Bots/Get Core Banking From DB.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [],
+      "ArgumentsSectionElementsOrder": [],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Bots/Load-Parsing IPN File.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "DBConnection&Sequence_3",
+        "in_ConnectionString&Sequence_3",
+        "str_CurrentFileFullText&Sequence_2",
+        "strArr_Lines&Sequence_2",
+        "CurrentTrx&Sequence_3",
+        "variable1&Sequence_4"
+      ],
+      "ArgumentsSectionElementsOrder": [
+        "in_ConnectionString",
+        "in_FailedFolder",
+        "in_ProcessedFolder",
+        "in_UnprocessedFolder"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Bots/Load-Parsing Core Banking File-DB.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "dt_CoreBankingTrx&Sequence_3",
+        "dt_TransactionData&Sequence_3",
+        "str_CurrentFileFullText&Sequence_2",
+        "strArr_Lines&Sequence_2",
+        "CurrentTrx&Sequence_3",
+        "in_ConnectionString&Sequence_3",
+        "DBConnection&Sequence_3"
+      ],
+      "ArgumentsSectionElementsOrder": [
+        "in_DBConnectionString",
+        "in_ProcessedFolder",
+        "in_FailedFolder",
+        "in_UnprocessedFolder"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Bots/Reconciliation Engine.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "str_ActionQueue&Sequence_1",
+        "str_ReconcilationStatus&Sequence_1",
+        "str_ReconcilationResult&Sequence_1",
+        "str_ReconcilationNote&Sequence_1",
+        "dict_ReconciliationMapping&Sequence_1",
+        "dt_ReconciliationMapping&Sequence_1",
+        "dt_TransactionToBeReconciled&Sequence_1"
+      ],
+      "ArgumentsSectionElementsOrder": [
+        "in_ReconciliationMappingSheetPath",
+        "in_DBConnectionString"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Bots/Reconciliation Logic.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "dt_ReconciliationMapping&Sequence_1",
+        "str_TransactionKey&Sequence_1",
+        "str_TransactionValue&Sequence_1",
+        "dict_ReconciliationMapping&Sequence_1",
+        "dt_ReconciliationMapping&Sequence_2",
+        "str_Key&Sequence_3",
+        "str_Value&Sequence_3"
+      ],
+      "ArgumentsSectionElementsOrder": [
+        "in_ReconciliationMappingTable",
+        "out_ActionQueue",
+        "out_ReconcilationNote",
+        "out_ReconcilationResult",
+        "out_ReconcilationStatus",
+        "in_TransactionToBeReconciled"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Bots/Daily Report Generator.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "str_ReportFilePath&Sequence_1",
+        "str_AmountDebitTrx&Sequence_1",
+        "str_AmountCreditTrx&Sequence_1",
+        "str_A&Sequence_1",
+        "str_NoCreditTrx&Sequence_1",
+        "str_NoDebitTrx&Sequence_1",
+        "str_&Sequence_1",
+        "str_TotalTrxAmount&Sequence_1",
+        "str_TotalNotReconciledTrx&Sequence_1",
+        "str_TotalMismatchedTrx&Sequence_1",
+        "str_TotalMatchedDuplicatedTrx&Sequence_1",
+        "str_TotalMatchedTrx&Sequence_1",
+        "dt_TempValue&Sequence_1",
+        "str_HtmlMail&Sequence_1",
+        "dt_CoreBankingRowData&Sequence_1",
+        "dt_IPNRowData&Sequence_1",
+        "dt_NotReconciledData&Sequence_1",
+        "dt_MismatchData&Sequence_1",
+        "dt_CoreStaged&Sequence_1",
+        "dt_IPNStaged&Sequence_1",
+        "dt_ReconciledData&Sequence_1"
+      ],
+      "ArgumentsSectionElementsOrder": [
+        "in_ReportsFolderPath",
+        "in_DBConnectionString",
+        "in_EmailRecivers",
+        "in_CCEmailRecivers",
+        "in_ReportDate"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    }
+  ]
+}
