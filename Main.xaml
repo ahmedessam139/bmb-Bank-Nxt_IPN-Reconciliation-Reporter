@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1110,827" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:umae="clr-namespace:UiPath.Mail.Activities.Enums;assembly=UiPath.Mail.Activities" xmlns:usau="clr-namespace:UiPath.Shared.Activities.Utils;assembly=UiPath.Mail.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1110,827" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>Microsoft.VisualBasic</x:String>
@@ -110,7 +110,7 @@
       <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <StateMachine InitialState="{x:Reference __ReferenceID0}" sap2010:Annotation.AnnotationText="" DisplayName="IPN Reconciliation" sap:VirtualizedContainerService.HintSize="919,669.04" sap2010:WorkflowViewState.IdRef="StateMachine_1">
+  <StateMachine InitialState="{x:Reference __ReferenceID0}" sap2010:Annotation.AnnotationText="" DisplayName="IPN Reconciliation" sap:VirtualizedContainerService.HintSize="1053,669.04" sap2010:WorkflowViewState.IdRef="StateMachine_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -265,7 +265,7 @@
           </sap:WorkflowViewStateService.ViewState>
           <Transition.Condition>[SystemError IS Nothing]</Transition.Condition>
           <Transition.To>
-            <State x:Name="__ReferenceID2" sap2010:Annotation.AnnotationText="Containing Business Process.&#xA;&#xA;Application Exceptions will trigger a retry of the entire process up to the MaxRetryNumber defined in the Config file.&#xA;&#xA;Business Rule Exceptions must be logged manually and are not handled by this framework." DisplayName="Process State" sap:VirtualizedContainerService.HintSize="484,788" sap2010:WorkflowViewState.IdRef="State_2">
+            <State x:Name="__ReferenceID2" sap2010:Annotation.AnnotationText="Containing Business Process.&#xA;&#xA;Application Exceptions will trigger a retry of the entire process up to the MaxRetryNumber defined in the Config file.&#xA;&#xA;Business Rule Exceptions must be logged manually and are not handled by this framework." DisplayName="Process State" sap:VirtualizedContainerService.HintSize="255,60" sap2010:WorkflowViewState.IdRef="State_2">
               <State.Entry>
                 <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438,373" sap2010:WorkflowViewState.IdRef="TryCatch_4">
                   <TryCatch.Try>
@@ -330,7 +330,7 @@
                   <Transition.To>
                     <State x:Name="__ReferenceID1" sap2010:Annotation.AnnotationText="Process ends here; Close Applications" DisplayName="End Process State" sap:VirtualizedContainerService.HintSize="179,60" sap2010:WorkflowViewState.IdRef="State_1" IsFinal="True">
                       <State.Entry>
-                        <TryCatch DisplayName="Try Close All Applications" sap:VirtualizedContainerService.HintSize="646,2031" sap2010:WorkflowViewState.IdRef="TryCatch_6">
+                        <TryCatch DisplayName="Try Close All Applications" sap:VirtualizedContainerService.HintSize="646,1590" sap2010:WorkflowViewState.IdRef="TryCatch_6">
                           <TryCatch.Variables>
                             <Variable x:TypeArguments="x:Boolean" Name="BrowserStillOpen" />
                           </TryCatch.Variables>
@@ -341,21 +341,21 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                           <TryCatch.Try>
-                            <Sequence sap:VirtualizedContainerService.HintSize="608,1803" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                            <Sequence sap:VirtualizedContainerService.HintSize="608,1362" sap2010:WorkflowViewState.IdRef="Sequence_13">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <If Condition="[Not SystemError is Nothing]" sap:VirtualizedContainerService.HintSize="574,1413" sap2010:WorkflowViewState.IdRef="If_2">
+                              <If Condition="[Not SystemError is Nothing]" sap:VirtualizedContainerService.HintSize="574,972" sap2010:WorkflowViewState.IdRef="If_2">
                                 <If.Then>
-                                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="540,1154" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="540,713" sap2010:WorkflowViewState.IdRef="Sequence_11">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
-                                    <TryCatch DisplayName="Try Catch(Send Mail To bus Team With Error)" sap:VirtualizedContainerService.HintSize="506,981" sap2010:WorkflowViewState.IdRef="TryCatch_7">
+                                    <TryCatch DisplayName="Try Catch(Send Mail To bus Team With Error)" sap:VirtualizedContainerService.HintSize="506,540" sap2010:WorkflowViewState.IdRef="TryCatch_7">
                                       <sap:WorkflowViewStateService.ViewState>
                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -363,7 +363,7 @@
                                         </scg:Dictionary>
                                       </sap:WorkflowViewStateService.ViewState>
                                       <TryCatch.Try>
-                                        <Sequence sap:VirtualizedContainerService.HintSize="468,721" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                                        <Sequence sap:VirtualizedContainerService.HintSize="468,280" sap2010:WorkflowViewState.IdRef="Sequence_10">
                                           <Sequence.Variables>
                                             <Variable x:TypeArguments="x:String" Name="str_HtmlMailBody" />
                                             <Variable x:TypeArguments="x:String" Name="str_ScreenshotsPath" />
@@ -381,8 +381,7 @@
                                               <InArgument x:TypeArguments="x:String">["Screenshots\Exception_screenshot_" + Now.ToString("yyyyMMdd_HHmmss") + ".png"]</InArgument>
                                             </Assign.Value>
                                           </Assign>
-                                          <uix:NTakeScreenshot DisplayName="Take Screenshot" FileName="[str_ScreenshotsPath]" FileNameMode="None" sap:VirtualizedContainerService.HintSize="434,263" sap2010:WorkflowViewState.IdRef="NTakeScreenshot_1" Version="V3" />
-                                          <Assign sap:VirtualizedContainerService.HintSize="434,115" sap2010:WorkflowViewState.IdRef="Assign_6">
+                                          <Assign sap:VirtualizedContainerService.HintSize="434,106" sap2010:WorkflowViewState.IdRef="Assign_6">
                                             <Assign.To>
                                               <OutArgument x:TypeArguments="x:String">[str_HtmlMailBody]</OutArgument>
                                             </Assign.To>
@@ -453,20 +452,6 @@
 &lt;/html&gt;"]</InArgument>
                                             </Assign.Value>
                                           </Assign>
-                                          <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" ContinueOnError="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" TimeoutMS="{x:Null}" Body="[str_HtmlMailBody]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="434,169" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" Importance="Normal" IsBodyHtml="True" IsDraft="False" Sensitivity="Normal" Subject="KSA Sales Order Oracle Dispatcher Error" To="[Config(&quot;TechnicalEmails&quot;).ToString]" UseISConnection="True">
-                                            <ui:SendOutlookMail.ConnectionDetailsBackupSlot>
-                                              <usau:BackupSlot x:TypeArguments="umae:ConnectionDetails" StoredValue="{x:Null}">
-                                                <usau:BackupSlot.BackupValues>
-                                                  <scg:Dictionary x:TypeArguments="umae:ConnectionDetails, scg:List(x:Object)" />
-                                                </usau:BackupSlot.BackupValues>
-                                              </usau:BackupSlot>
-                                            </ui:SendOutlookMail.ConnectionDetailsBackupSlot>
-                                            <ui:SendOutlookMail.Files>
-                                              <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
-                                                <InArgument x:TypeArguments="x:String">[str_ScreenshotsPath]</InArgument>
-                                              </scg:List>
-                                            </ui:SendOutlookMail.Files>
-                                          </ui:SendOutlookMail>
                                         </Sequence>
                                       </TryCatch.Try>
                                       <TryCatch.Catches>
