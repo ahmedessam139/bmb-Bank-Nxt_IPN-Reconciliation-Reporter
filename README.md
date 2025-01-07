@@ -1,421 +1,116 @@
-# BMB BankNXT IPN Reconciliation
+# BMB BankNXT IPN Reconciliation Daily Reporter
 
-An automated solution for reconciling Instant Payment Notification (IPN) transactions in the BankNXT system. This UiPath-based RPA solution streamlines the reconciliation process by automating data validation, comparison, and reporting tasks.
+## Overview
 
-## 🚀 Technical Overview
+This UiPath automation project generates daily reconciliation reports for IPN (Instant Payment Network) transactions. The process automatically collects data from the database, generates reports, and distributes them to specified stakeholders via email.
 
-### Project Architecture
-
-- **Main Workflow**: `Main.xaml` - Primary orchestrator workflow
-- **Process Workflow**: `Process.xaml` - Core business logic implementation
-- **Test Workflow**: `Test.xaml` - Testing and validation scenarios
-
-### Technology Stack
-
-- **Platform**: UiPath Studio
-- **Framework Version**: Windows
-- **Development Environment**: UiPath Studio 19.10.2.0
-- **Project Version**: 1.0.18
-
-### Core Dependencies
-
-- UiPath.Database.Activities (1.9.0)
-- UiPath.Excel.Activities (2.24.4)
-- UiPath.Mail.Activities (1.24.11)
-- UiPath.PDF.Activities (3.20.2)
-- UiPath.System.Activities (24.10.7)
-- UiPath.UIAutomation.Activities (24.10.10)
-
-## 🛠 Workflow & Data Flow
-
-### 1. Initialization Process
-
-- Reads configuration from `Config.xlsx`
-- Creates required project folders
-- Initializes logging with business process name
-- Sets up application dependencies and connections
-
-### 2. Main Process Flow
-
-1. **IPN File Acquisition**
-
-   - Retrieves IPN transaction files
-   - Validates file format and structure
-   - Moves to appropriate processing directory
-
-2. **Core Banking Data Integration**
-
-   - Fetches core banking transaction data
-   - Supports both file-based and DB-based retrieval
-   - Validates data integrity
-
-3. **Parallel Processing**
-
-   - **IPN Data Processing**
-     - Parses IPN files
-     - Validates transaction records
-     - Stores in staging area
-   - **Core Banking Data Processing**
-     - Processes core banking records
-     - Normalizes data format
-     - Prepares for reconciliation
-
-4. **Reconciliation Engine**
-   - Matches transactions between systems
-   - Identifies discrepancies
-   - Generates reconciliation reports
-
-### 3. Data Management
-
-- **Input Folders**:
-  - `IPNFilesUnprocessed_Path`: New IPN files
-  - `CoreBankingFiles_Path`: Core banking data
-- **Output Folders**:
-  - `IPNFilesProcessed_Path`: Successfully processed IPN files
-  - `IPNFilesFailed_Path`: Failed/error files
-- **Database**:
-  - Uses configured connection string for data persistence
-  - Stores reconciliation results and audit trails
-
-## 🛠️ Project Structure
+## Project Structure
 
 ```
-├── Main.xaml           # Main orchestrator workflow
-├── Process.xaml        # Core business logic
-├── Test.xaml          # Testing scenarios
-├── Framework/         # Framework components
-├── Data/             # Data processing components
-│   └── Config.xlsx   # Configuration settings
-└── Bots/             # Bot implementation files
-    ├── Get IPN File.xaml
-    ├── Get Core Banking File.xaml
-    ├── Load-Parsing IPN File.xaml
-    ├── Load-Parsing Core Banking File-DB.xaml
-    └── Reconciliation Engine.xaml
+├── Bots/
+│   └── Daily Report Generator.xaml
+├── Data/
+│   └── Config.xlsx
+├── Framework/
+│   ├── InitAllSettings.xaml
+│   ├── InitAllApplications.xaml
+│   ├── CreateProjectFolders.xaml
+│   └── KillAllProcesses.xaml
+├── Html Email Templates/
+├── Main.xaml
+└── Process.xaml
 ```
 
-## ⚙️ Configuration
+## Prerequisites
 
-- **Expression Language**: VisualBasic
-- **Execution Type**: Workflow
-- **Project Profile**: Development
-- **Output Type**: Process
-
-## 🔒 Security Features
-
-- Private data logging exclusion
-- Password protection mechanisms
-- Secure credential handling
-
-## 🔄 Runtime Configuration
-
-- **Auto Dispose**: Disabled
-- **Lazy Loading**: Disabled
-- **Pausable**: Yes
-- **User Interaction**: Required
-- **Persistence Support**: No
-
-## 📋 Prerequisites
-
-- UiPath Studio 19.10.2.0 or higher
+- UiPath Studio (v19.10.2.0 or higher)
 - Windows Operating System
-- Required UiPath dependencies as listed above
-- Appropriate system access permissions
-- Database access credentials (if using DB mode)
+- Database access with proper credentials
+- Microsoft Outlook (for email functionality)
 
-## 🚦 Getting Started
+## Dependencies
 
-1. Clone the repository
-2. Open the project in UiPath Studio
-3. Configure necessary credentials and settings in `Config.xlsx`:
-   - Database connection strings
-   - File paths and locations
-   - Email settings (if enabled)
-4. Run Test.xaml to validate setup
-5. Execute Main.xaml for production workflow
+- UiPath.Database.Activities (v1.9.0)
+- UiPath.Excel.Activities (v2.24.4)
+- UiPath.Mail.Activities (v1.23.11)
+- UiPath.System.Activities (v24.10.6)
+- UiPath.UIAutomation.Activities (v24.10.6)
 
-## 🔍 Key Features
+## Configuration
 
-- Automated IPN transaction reconciliation
-- Data validation and verification
-- Automated reporting
-- Error handling and logging
-- Email notifications
-- PDF processing capabilities
-- Database integration
-- Parallel processing for improved performance
-- Configurable matching rules
-- Audit trail generation
+The project uses a configuration file (`Data/Config.xlsx`) with two sheets:
 
-## 📝 Notes
+- **Settings**: Contains environment-specific settings
+- **Constants**: Contains constant values used throughout the process
 
-- Ensure all dependencies are properly installed
-- Verify system access permissions before execution
-- Review logs for any execution issues
-- Follow proper credential management procedures
-- Monitor disk space in output directories
-- Regular backup of configuration files recommended
+### Key Configuration Parameters
 
-## 🤝 Contributing
+- `DBConnectionString`: Database connection string
+- `ReportEmailReceivers`: Primary email recipients for the report
+- `ReportEmailCCReceivers`: CC email recipients for the report
+- `ReportsFolder_Path`: Path where generated reports are stored
 
-Please follow the standard development practices and ensure all tests pass before submitting changes.
+## Workflow Description
 
-## 📄 License
+### 1. Main Workflow (Main.xaml)
 
-Proprietary - All rights reserved
+- Entry point of the automation
+- Initializes the environment and configurations
+- Handles error logging and system state management
+- Orchestrates the overall process flow
 
-## 📚 Detailed Workflow Documentation
+### 2. Process Workflow (Process.xaml)
 
-### Main Workflows
+- Invokes the Daily Report Generator
+- Passes necessary parameters from configuration
+- Handles the main business logic execution
 
-#### 1. Main.xaml
+### 3. Daily Report Generator (Bots/Daily Report Generator.xaml)
 
-**Description:**
+- Connects to the database
+- Generates the daily reconciliation report
+- Formats and prepares the report
+- Sends email notifications with the report to stakeholders
 
-- Primary orchestrator workflow that manages the entire reconciliation process
-- Handles initialization, error handling, and process flow control
+## Inputs
 
-**Inputs:**
+- Database connection details (from config)
+- Email distribution lists (from config)
+- Report date (automatically set to current date)
+- Report folder path (from config)
 
-- None (Entry point workflow)
+## Outputs
 
-**Outputs:**
+1. Daily reconciliation report files
+2. Email notifications to stakeholders with report attachments
 
-- `SystemError`: Exception object for error handling
-- `Config`: Dictionary containing all configuration settings
+## Error Handling
 
-**Key Functions:**
+- The process includes comprehensive error handling and logging
+- Screenshots are captured on errors for debugging
+- System errors are properly logged and reported
 
-- Initializes system configuration from Config.xlsx
-- Creates required project folders
-- Sets up logging and error handling
-- Manages application state and workflow transitions
-- Orchestrates the execution of sub-workflows
+## Running the Process
 
-#### 2. Process.xaml
+1. Ensure all configurations in `Config.xlsx` are properly set
+2. Verify database connectivity
+3. Check email settings and permissions
+4. Execute the main workflow (Main.xaml)
 
-**Description:**
+## Maintenance
 
-- Implements core business logic for IPN reconciliation
-- Manages the sequence of data processing and reconciliation steps
+- Regular updates to email distribution lists in config file
+- Periodic review of database connection settings
+- Monitoring of report folder storage capacity
+- Review of error logs and screenshots
 
-**Inputs:**
+## Security Considerations
 
-- `in_Config`: Dictionary containing configuration settings
+- Database credentials are stored securely
+- Email distribution lists are maintained in configuration
+- Private data is excluded from logs
+- Password fields are masked in all logging
 
-**Outputs:**
+## Version
 
-- Process execution status
-- Reconciliation results
-
-**Key Functions:**
-
-- Coordinates file acquisition processes
-- Manages parallel processing of IPN and Core Banking data
-- Triggers reconciliation engine
-- Handles process-level error management
-
-#### 3. Test.xaml
-
-**Description:**
-
-- Validates system setup and configuration
-- Tests critical functionality before production deployment
-
-**Inputs:**
-
-- Test configuration settings
-- Sample test data
-
-**Outputs:**
-
-- Test results and validation status
-- System readiness report
-
-**Key Functions:**
-
-- Validates file paths and permissions
-- Tests database connectivity
-- Verifies email configuration
-- Checks processing logic with sample data
-
-### Bot Workflows
-
-#### 1. Get IPN File.xaml
-
-**Description:**
-
-- Retrieves IPN transaction files from configured source locations
-
-**Inputs:**
-
-- Source directory path
-- File pattern configurations
-- Timestamp filters
-
-**Outputs:**
-
-- Retrieved IPN files
-- File acquisition status
-- Error logs (if any)
-
-**Key Functions:**
-
-- Monitors source directory for new files
-- Validates file naming conventions
-- Performs initial file integrity checks
-- Moves files to processing directory
-
-#### 2. Get Core Banking File.xaml
-
-**Description:**
-
-- Retrieves transaction data from core banking system
-
-**Inputs:**
-
-- Core banking system connection details
-- Date range parameters
-- Transaction type filters
-
-**Outputs:**
-
-- Core banking transaction data
-- Data retrieval status
-- Error reports
-
-**Key Functions:**
-
-- Connects to core banking system
-- Extracts relevant transaction data
-- Validates data completeness
-- Prepares data for processing
-
-#### 3. Load-Parsing IPN File.xaml
-
-**Description:**
-
-- Processes and parses IPN files for reconciliation
-
-**Inputs:**
-
-- `in_UnprocessedFolder`: Path to unprocessed IPN files
-- `in_ProcessedFolder`: Path for successfully processed files
-- `in_FailedFolder`: Path for failed processing
-- `in_ConnectionString`: Database connection string
-
-**Outputs:**
-
-- Parsed transaction records
-- Processing status
-- Error logs
-
-**Key Functions:**
-
-- Reads and validates IPN file format
-- Extracts transaction details
-- Transforms data to standard format
-- Stores processed data in database
-- Manages file movement between folders
-
-#### 4. Load-Parsing Core Banking File-DB.xaml
-
-**Description:**
-
-- Processes core banking data and prepares for reconciliation
-
-**Inputs:**
-
-- `in_UnprocessedFolder`: Source folder path
-- `in_ProcessedFolder`: Destination for processed files
-- `in_FailedFolder`: Path for failed files
-- `in_DBConnectionString`: Database connection details
-
-**Outputs:**
-
-- Processed banking records
-- Processing status and logs
-- Error reports
-
-**Key Functions:**
-
-- Parses core banking file format
-- Validates transaction records
-- Normalizes data structure
-- Updates database with processed records
-- Handles file archiving
-
-#### 5. Reconciliation Engine.xaml
-
-**Description:**
-
-- Performs matching and reconciliation between IPN and core banking records
-
-**Inputs:**
-
-- Processed IPN records
-- Core banking transaction data
-- Matching rules configuration
-- Tolerance settings
-
-**Outputs:**
-
-- Reconciliation results
-- Matched transactions
-- Discrepancy reports
-- Audit logs
-
-**Key Functions:**
-
-- Applies matching algorithms
-- Identifies discrepancies
-- Generates reconciliation reports
-- Creates audit trails
-- Handles exception cases
-- Produces summary statistics
-
-### Framework Components
-
-#### InitAllSettings.xaml
-
-**Description:**
-
-- Initializes all system settings and configurations
-
-**Inputs:**
-
-- `in_ConfigFile`: Path to Config.xlsx
-- `in_ConfigSheets`: Array of configuration sheet names
-
-**Outputs:**
-
-- `out_Config`: Populated configuration dictionary
-
-**Key Functions:**
-
-- Reads configuration files
-- Validates settings
-- Sets up global variables
-- Initializes logging configuration
-
-#### CreateProjectFolders.xaml
-
-**Description:**
-
-- Sets up required directory structure for the project
-
-**Inputs:**
-
-- `in_Config`: Configuration dictionary with folder paths
-
-**Outputs:**
-
-- Created folder structure
-- Setup status
-
-**Key Functions:**
-
-- Creates necessary directories
-- Sets folder permissions
-- Validates folder access
-- Maintains folder structure integrity
+Current Version: 1.0.18

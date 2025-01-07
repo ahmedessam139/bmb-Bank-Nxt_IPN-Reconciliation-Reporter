@@ -128,7 +128,7 @@
       <AssemblyReference>System.Linq.Queryable</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Daily_Report_Generator" sap:VirtualizedContainerService.HintSize="1036,3435" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Daily_Report_Generator" sap:VirtualizedContainerService.HintSize="1060,3435" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dt_ReconciledData" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_IPNStaged" />
@@ -352,7 +352,10 @@
       <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_IPNStaged]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="434,148" sap2010:WorkflowViewState.IdRef="WriteRange_6" SheetName="Staged IPN Trx" WorkbookPath="[str_ReportFilePath]" />
       <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_CoreStaged]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="434,139" sap2010:WorkflowViewState.IdRef="WriteRange_7" SheetName="Staged Core Trx" WorkbookPath="[str_ReportFilePath]" />
     </Sequence>
-    <Sequence DisplayName="Mail Maker" sap:VirtualizedContainerService.HintSize="468,99" sap2010:WorkflowViewState.IdRef="Sequence_7">
+    <Sequence DisplayName="Mail Maker" sap:VirtualizedContainerService.HintSize="513,2160" sap2010:WorkflowViewState.IdRef="Sequence_7">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:String" Name="str_MatchingRecRate" />
+      </Sequence.Variables>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -1416,6 +1419,14 @@
         </ui:MultipleAssign.AssignOperations>
       </ui:MultipleAssign>
       <ui:Comment sap:VirtualizedContainerService.HintSize="479,88" sap2010:WorkflowViewState.IdRef="Comment_2" Text="Update Summary Values" />
+      <Assign sap:VirtualizedContainerService.HintSize="479,114" sap2010:WorkflowViewState.IdRef="Assign_13">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[str_MatchingRecRate]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[((CInt(str_TotalMatchedTrx) / CInt(dt_ReconciledData.Rows.Count.ToString)) * 100).ToString("F2")]</InArgument>
+        </Assign.Value>
+      </Assign>
       <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,303" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
         <ui:MultipleAssign.AssignOperations>
           <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
@@ -1464,7 +1475,7 @@
                 <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
               </ui:AssignOperation.To>
               <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{MatchingReconciliationRate}}","30")]</InArgument>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{MatchingReconciliationRate}}",str_MatchingRecRate)]</InArgument>
               </ui:AssignOperation.Value>
             </ui:AssignOperation>
           </scg:List>
