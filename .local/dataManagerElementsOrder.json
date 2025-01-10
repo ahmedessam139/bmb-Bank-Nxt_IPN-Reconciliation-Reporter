@@ -196,6 +196,8 @@
       "Path": "Bots/Daily Report Generator.xaml",
       "SortBy": 0,
       "VariablesSectionElementsOrder": [
+        "bl_ExcelFileExists&Sequence_3",
+        "str_MatchingRecRate&Sequence_7",
         "str_ReportFilePath&Sequence_1",
         "str_AmountDebitTrx&Sequence_1",
         "str_AmountCreditTrx&Sequence_1",

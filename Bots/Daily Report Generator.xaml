@@ -128,7 +128,7 @@
       <AssemblyReference>System.Linq.Queryable</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Daily_Report_Generator" sap:VirtualizedContainerService.HintSize="1060,3435" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Daily_Report_Generator" sap:VirtualizedContainerService.HintSize="1036,5527" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dt_ReconciledData" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_IPNStaged" />
@@ -157,10 +157,10 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="Get Data(Tables) From DB" sap:VirtualizedContainerService.HintSize="468,99" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence DisplayName="Get Data(Tables) From DB" sap:VirtualizedContainerService.HintSize="513,1278" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
@@ -170,7 +170,7 @@
           <scg:Dictionary x:TypeArguments="x:String, Argument" />
         </ui:ExecuteQuery.Parameters>
       </ui:ExecuteQuery>
-      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_MismatchData]" DisplayName="Get All Mismatch-duplicated Table" sap:VirtualizedContainerService.HintSize="416,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_4" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;SELECT * &quot; &amp; &#xA;        &quot;FROM [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] &quot; &amp; &#xA;        &quot;WHERE CONVERT(DATE, ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;' &quot; &amp; &#xA;        &quot;AND ReconciliationStatus = 'reconciled' &quot; &amp; &#xA;        &quot;AND ReconciliationResult IN ('not matched', 'matched duplicated')&quot;]">
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_MismatchData]" DisplayName="Get All Mismatch-duplicated Table" sap:VirtualizedContainerService.HintSize="416,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_4" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;SELECT * &quot; &amp; &#xA;        &quot;FROM [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] &quot; &amp; &#xA;        &quot;WHERE CONVERT(DATE, ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;' &quot; &amp; &#xA;        &quot;AND ReconciliationStatus = 'reconciled' &quot; &amp; &#xA;        &quot;AND ReconciliationResult IN ('not matched', 'matched-duplicated')&quot;]">
         <ui:ExecuteQuery.Parameters>
           <scg:Dictionary x:TypeArguments="x:String, Argument" />
         </ui:ExecuteQuery.Parameters>
@@ -201,10 +201,10 @@
         </ui:ExecuteQuery.Parameters>
       </ui:ExecuteQuery>
     </Sequence>
-    <Sequence DisplayName="Get Data(Values) From DB" sap:VirtualizedContainerService.HintSize="468,2684" sap2010:WorkflowViewState.IdRef="Sequence_8">
+    <Sequence DisplayName="Get Data(Values) From DB" sap:VirtualizedContainerService.HintSize="513,57" sap2010:WorkflowViewState.IdRef="Sequence_8">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
@@ -261,7 +261,7 @@
           <InArgument x:TypeArguments="x:String">[dt_TempValue(0)(0).ToString]</InArgument>
         </Assign.Value>
       </Assign>
-      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_TempValue]" DisplayName="Get IPN Row Data Table" sap:VirtualizedContainerService.HintSize="434,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_11" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;SELECT SUM(CAST(IPNTransactionAmount AS DECIMAL(18, 2))) AS TotalTransactionAmount &quot; &amp; &#xA;        &quot;FROM [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] &quot; &amp; &#xA;        &quot;WHERE CONVERT(DATE, ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;' &quot; &amp; &#xA;        &quot;AND ReconciliationResult = 'matched-success'&quot;]">
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_TempValue]" DisplayName="Get IPN Row Data Table" sap:VirtualizedContainerService.HintSize="434,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_11" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;SELECT SUM(CAST(IPNTransactionAmount AS DECIMAL(18, 2))) AS TotalTransactionAmount &quot; &amp; &#xA;        &quot;FROM [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] &quot; &amp; &#xA;        &quot;WHERE CONVERT(DATE, ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;' &quot; &amp; &#xA;        &quot;AND ReconciliationResult IN ('matched-success', 'matched-duplicated')&quot;]">
         <ui:ExecuteQuery.Parameters>
           <scg:Dictionary x:TypeArguments="x:String, Argument" />
         </ui:ExecuteQuery.Parameters>
@@ -314,7 +314,7 @@
           <InArgument x:TypeArguments="x:String">[dt_TempValue(0)(0).ToString]</InArgument>
         </Assign.Value>
       </Assign>
-      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_TempValue]" DisplayName="Get IPN Row Data Table" sap:VirtualizedContainerService.HintSize="434,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_16" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;SELECT SUM(CAST(IPNTransactionAmount AS DECIMAL(18, 2))) AS TotalTransactionAmount &quot; &amp; &#xD;&#xA;        &quot;FROM [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] &quot; &amp; &#xD;&#xA;        &quot;WHERE CONVERT(DATE, ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;' &quot; &amp; &#xD;&#xA;        &quot;AND CoreBankingPartyType = 'debit' &quot; &amp; &#xD;&#xA;        &quot;AND ReconciliationResult IN ('matched-success', 'matched-duplicated')&quot;]">
+      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" ConnectionString="[in_DBConnectionString]" DataTable="[dt_TempValue]" DisplayName="Get IPN Row Data Table" sap:VirtualizedContainerService.HintSize="434,146" sap2010:WorkflowViewState.IdRef="ExecuteQuery_16" ProviderName="Microsoft.Data.SqlClient" Sql="[&quot;SELECT SUM(CAST(IPNTransactionAmount AS DECIMAL(18, 2))) AS TotalTransactionAmount &quot; &amp; &#xA;        &quot;FROM [UiPath Processes Data].[dbo].[IPNReconciliation_ReconciliationResultsTransactions] &quot; &amp; &#xA;        &quot;WHERE CONVERT(DATE, ReconciliationDate) = '&quot; &amp; in_ReportDate &amp; &quot;' &quot; &amp; &#xA;        &quot;AND CoreBankingPartyType = 'debit' &quot; &amp; &#xA;        &quot;AND ReconciliationResult IN ('matched-success', 'matched-duplicated')&quot;]">
         <ui:ExecuteQuery.Parameters>
           <scg:Dictionary x:TypeArguments="x:String, Argument" />
         </ui:ExecuteQuery.Parameters>
@@ -328,15 +328,18 @@
         </Assign.Value>
       </Assign>
     </Sequence>
-    <Sequence DisplayName="Excel Report Maker" sap:VirtualizedContainerService.HintSize="468,99" sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <Sequence DisplayName="Excel Report Maker" sap:VirtualizedContainerService.HintSize="513,1929" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:Boolean" Name="bl_ExcelFileExists" />
+      </Sequence.Variables>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,173" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;Prepare Excel Report &quot;]" />
-      <Assign sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_12">
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="450,173" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;Prepare Excel Report &quot;]" />
+      <Assign sap:VirtualizedContainerService.HintSize="450,114" sap2010:WorkflowViewState.IdRef="Assign_12">
         <Assign.To>
           <OutArgument x:TypeArguments="x:String">[str_ReportFilePath]</OutArgument>
         </Assign.To>
@@ -344,21 +347,44 @@
           <InArgument x:TypeArguments="x:String">[in_ReportsFolderPath &amp; "\IPNReconciliation_Daily_Report_" &amp; in_ReportDate &amp; ".xlsx"]</InArgument>
         </Assign.Value>
       </Assign>
-      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_ReconciledData]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="434,148" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Reconciled Trx" WorkbookPath="[str_ReportFilePath]" />
-      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_MismatchData]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="434,148" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="Mismatch Reconciled Trx " WorkbookPath="[str_ReportFilePath]" />
-      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_NotReconciledData]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="434,148" sap2010:WorkflowViewState.IdRef="WriteRange_3" SheetName="Not Reconciled Trx" WorkbookPath="[str_ReportFilePath]" />
-      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_IPNRowData]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="434,148" sap2010:WorkflowViewState.IdRef="WriteRange_4" SheetName="IPN Raw Trx" WorkbookPath="[str_ReportFilePath]" />
-      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_CoreBankingRowData]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="434,148" sap2010:WorkflowViewState.IdRef="WriteRange_5" SheetName="Core Raw Trx" WorkbookPath="[str_ReportFilePath]" />
-      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_IPNStaged]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="434,148" sap2010:WorkflowViewState.IdRef="WriteRange_6" SheetName="Staged IPN Trx" WorkbookPath="[str_ReportFilePath]" />
-      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_CoreStaged]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="434,139" sap2010:WorkflowViewState.IdRef="WriteRange_7" SheetName="Staged Core Trx" WorkbookPath="[str_ReportFilePath]" />
+      <ui:FileExistsX DisplayName="File Exists" Exists="[bl_ExcelFileExists]" sap:VirtualizedContainerService.HintSize="450,165" sap2010:WorkflowViewState.IdRef="FileExistsX_1" Path="[str_ReportFilePath]" />
+      <If Condition="[bl_ExcelFileExists]" sap:VirtualizedContainerService.HintSize="450,358" sap2010:WorkflowViewState.IdRef="If_1">
+        <If.Then>
+          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,163" sap2010:WorkflowViewState.IdRef="Sequence_9">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:DeleteFileX DisplayName="Delete File" sap:VirtualizedContainerService.HintSize="382,103" sap2010:WorkflowViewState.IdRef="DeleteFileX_1" Path="[str_ReportFilePath]" />
+          </Sequence>
+        </If.Then>
+        <If.Else>
+          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,25" sap2010:WorkflowViewState.IdRef="Sequence_10">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </Sequence>
+        </If.Else>
+      </If>
+      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_ReconciledData]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="450,148" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Reconciled Trx" WorkbookPath="[str_ReportFilePath]" />
+      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_MismatchData]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="450,148" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="Mismatch Reconciled Trx " WorkbookPath="[str_ReportFilePath]" />
+      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_NotReconciledData]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="450,148" sap2010:WorkflowViewState.IdRef="WriteRange_3" SheetName="Not Reconciled Trx" WorkbookPath="[str_ReportFilePath]" />
+      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_IPNRowData]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="450,148" sap2010:WorkflowViewState.IdRef="WriteRange_4" SheetName="IPN Raw Trx" WorkbookPath="[str_ReportFilePath]" />
+      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_CoreBankingRowData]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="450,148" sap2010:WorkflowViewState.IdRef="WriteRange_5" SheetName="Core Raw Trx" WorkbookPath="[str_ReportFilePath]" />
+      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_IPNStaged]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="450,148" sap2010:WorkflowViewState.IdRef="WriteRange_6" SheetName="Staged IPN Trx" WorkbookPath="[str_ReportFilePath]" />
+      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_CoreStaged]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="450,139" sap2010:WorkflowViewState.IdRef="WriteRange_7" SheetName="Staged Core Trx" WorkbookPath="[str_ReportFilePath]" />
     </Sequence>
-    <Sequence DisplayName="Mail Maker" sap:VirtualizedContainerService.HintSize="513,2160" sap2010:WorkflowViewState.IdRef="Sequence_7">
+    <Sequence DisplayName="Mail Maker" sap:VirtualizedContainerService.HintSize="513,2192" sap2010:WorkflowViewState.IdRef="Sequence_7">
       <Sequence.Variables>
         <Variable x:TypeArguments="x:String" Name="str_MatchingRecRate" />
       </Sequence.Variables>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
@@ -1412,7 +1438,7 @@
                 <OutArgument x:TypeArguments="x:String">[str_HtmlMail]</OutArgument>
               </ui:AssignOperation.To>
               <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{TotalTrxAmount}}",str_TotalTrxAmount)]</InArgument>
+                <InArgument x:TypeArguments="x:String">[str_HtmlMail.Replace("{{TotalTrxAmount}}",If(CDbl(str_AmountCreditTrx) &gt; CDbl(str_AmountDebitTrx), "C-" &amp; (CDbl(str_AmountCreditTrx) - CDbl(str_AmountDebitTrx)).ToString("F2"), "D-" &amp; (CDbl(str_AmountDebitTrx) - CDbl(str_AmountCreditTrx)).ToString("F2")))]</InArgument>
               </ui:AssignOperation.Value>
             </ui:AssignOperation>
           </scg:List>
@@ -1545,10 +1571,11 @@
         </ui:MultipleAssign.AssignOperations>
       </ui:MultipleAssign>
     </Sequence>
-    <Sequence DisplayName="Send Mail " sap:VirtualizedContainerService.HintSize="468,431" sap2010:WorkflowViewState.IdRef="Sequence_4">
+    <Sequence DisplayName="Send Mail " sap:VirtualizedContainerService.HintSize="513,48" sap2010:WorkflowViewState.IdRef="Sequence_4">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,173" sap2010:WorkflowViewState.IdRef="LogMessage_5" Message="[&quot;Send Mail&quot;]" />
